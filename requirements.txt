@@ -1,3 +1,4 @@
+python-3.2.0
 Flask
 Jinja2
 MarkupSafe
