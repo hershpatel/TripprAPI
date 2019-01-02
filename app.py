@@ -1,11 +1,17 @@
 import os
+import json
 from flask import Flask
+from flask import jsonify
+from flask import make_response
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "Hello world!"
+@app.route("/seattle")
+def getSeattleCluster():
+	fp = open('trips/seattle.json', 'r')
+	seattle = json.load(fp)
+	fp.close()
+	return jsonify(seattle)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
