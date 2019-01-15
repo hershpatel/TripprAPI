@@ -14,7 +14,7 @@ def storeSeattleGroups():
 	lines = [(line[0], line[1].split("\t")[0][1:]) for line in lines]
 
 	seattle = {'num_groups':5, 'groups':[]}
-	colors = {'A':'#ffffff', 'B':'#ffffff', 'C':'#ffffff', 'D':'#ffffff', 'E':'#ffffff'}
+	colors = {'A':'#6666ff', 'B':'#66cdff', 'C':'#ee9713', 'D':'#5ddb52', 'E':'#e15656'}
 	groups = set()
 	for line in lines:
 		group = line[0]
