@@ -1,7 +1,7 @@
 {
     "groups": [
         {
-            "color": "#ffffff",
+            "color": "#6666ff",
             "group_name": "A",
             "places": [
                 {
@@ -73,7 +73,7 @@
             ]
         },
         {
-            "color": "#ffffff",
+            "color": "#66cdff",
             "group_name": "B",
             "places": [
                 {
@@ -145,7 +145,7 @@
             ]
         },
         {
-            "color": "#ffffff",
+            "color": "#ee9713",
             "group_name": "C",
             "places": [
                 {
@@ -228,7 +228,7 @@
             ]
         },
         {
-            "color": "#ffffff",
+            "color": "#5ddb52",
             "group_name": "D",
             "places": [
                 {
@@ -300,7 +300,7 @@
             ]
         },
         {
-            "color": "#ffffff",
+            "color": "#e15656",
             "group_name": "E",
             "places": [
                 {
