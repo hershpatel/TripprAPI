@@ -18,20 +18,20 @@ def storeSeattleGroups():
 	groups = set()
 	for line in lines:
 		group = line[0]
-		thing = line[1]
+		place = line[1]
 		if not group in groups:
 			seattle['groups'].append({})
 			seattle['groups'][-1]['group_name'] = group
 			seattle['groups'][-1]['color'] = colors[group]
 			seattle['groups'][-1]['places'] = []
 			groups.add(group)
-		info = json.loads(requests.get(query+thing+api_key).text)['results']
+		info = json.loads(requests.get(query+place+api_key).text)['results']
 		address = info[0]['formatted_address']
 		lat = info[0]['geometry']['location']['lat']
 		lon = info[0]['geometry']['location']['lng']
 		rating = info[0]['rating']
-		thing = {'name':thing, 'address':address, 'coord':[lon,lat], 'lon':lon, 'lat':lat, 'rating':rating}
-		seattle['groups'][-1]['places'].append(thing)
+		place = {'name':place, 'address':address, 'coord':[lon,lat], 'lon':lon, 'lat':lat, 'rating':rating}
+		seattle['groups'][-1]['places'].append(place)
 
 	fp = open('seattle.json', 'w')
 	json.dump(seattle, fp, indent=4, separators=(',', ': '), sort_keys=True)
