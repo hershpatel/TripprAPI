@@ -4,3 +4,4 @@ MarkupSafe
 Werkzeug
 argparse
 itsdangerous
+flask-cors
