@@ -43,6 +43,8 @@ def storeSeattleGroups():
 			count+=1
 		group['centroid'] = [lon/count, lat/count]
 		group['num_places'] = count
+
+	seattle['trip_id'] = 'ABCD1234'
 		
 
 	fp = open('seattle.json', 'w')

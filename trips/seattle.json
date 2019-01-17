@@ -364,5 +364,6 @@
             ]
         }
     ],
-    "num_groups": 5
+    "num_groups": 5,
+    "trip_id": null
 }
