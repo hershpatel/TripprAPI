@@ -1,8 +1,13 @@
 {
     "groups": [
         {
+            "centroid": [
+                -122.34130244999999,
+                47.608672883333334
+            ],
             "color": "#6666ff",
             "group_name": "A",
+            "num_places": 6,
             "places": [
                 {
                     "address": "1901 Western Ave D, Seattle, WA 98101, USA",
@@ -73,8 +78,13 @@
             ]
         },
         {
+            "centroid": [
+                -122.33115413333333,
+                47.60356761666666
+            ],
             "color": "#66cdff",
             "group_name": "B",
+            "num_places": 6,
             "places": [
                 {
                     "address": "700 4th Ave 73rd floor, Seattle, WA 98104, USA",
@@ -145,8 +155,13 @@
             ]
         },
         {
+            "centroid": [
+                -122.34439357142855,
+                47.61237199999999
+            ],
             "color": "#ee9713",
             "group_name": "C",
+            "num_places": 7,
             "places": [
                 {
                     "address": "305 Harrison St, Seattle, WA 98109, USA",
@@ -228,8 +243,13 @@
             ]
         },
         {
+            "centroid": [
+                -122.33679796666667,
+                47.6320321
+            ],
             "color": "#5ddb52",
             "group_name": "D",
+            "num_places": 6,
             "places": [
                 {
                     "address": "5420 Ballard Ave NW, Seattle, WA 98107, USA",
@@ -300,8 +320,13 @@
             ]
         },
         {
+            "centroid": [
+                -122.31723016666666,
+                47.63330946666667
+            ],
             "color": "#e15656",
             "group_name": "E",
+            "num_places": 3,
             "places": [
                 {
                     "address": "1075 Lake Washington Blvd E, Seattle, WA 98112, USA",

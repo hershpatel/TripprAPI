@@ -16,6 +16,7 @@ def storeSeattleGroups():
 	seattle = {'num_groups':5, 'groups':[]}
 	colors = {'A':'#6666ff', 'B':'#66cdff', 'C':'#ee9713', 'D':'#5ddb52', 'E':'#e15656'}
 	groups = set()
+	
 	for line in lines:
 		group = line[0]
 		place = line[1]
@@ -32,6 +33,17 @@ def storeSeattleGroups():
 		rating = info[0]['rating']
 		place = {'name':place, 'address':address, 'coord':[lon,lat], 'lon':lon, 'lat':lat, 'rating':rating}
 		seattle['groups'][-1]['places'].append(place)
+
+	for group in seattle['groups']:
+		lat = lon = 0.0
+		count = 0
+		for place in group['places']:
+			lat += place['lat']
+			lon += place['lon']
+			count+=1
+		group['centroid'] = [lon/count, lat/count]
+		group['num_places'] = count
+		
 
 	fp = open('seattle.json', 'w')
 	json.dump(seattle, fp, indent=4, separators=(',', ': '), sort_keys=True)
