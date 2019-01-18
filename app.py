@@ -45,7 +45,7 @@ def getSeattleCluster():
 	fp = open('trips/seattle.json', 'r')
 	seattle = json.load(fp)
 	fp.close()
-	return jsonify(seattle)
+	return make_response(jsonify(seattle), 200)
 
 # save trip
 @app.route("/saveTrip/<tripID>", methods=['POST'])
@@ -77,9 +77,10 @@ NOTES
 Processing Incoming Request Data 
 - https://scotch.io/bar-talk/processing-incoming-request-data-in-flask
 
-MongoDB / Flask / Heroku 
+MongoDB / Flask / REST/ Heroku 
 - https://spapas.github.io/2014/06/30/rest-flask-mongodb-heroku/
 - https://medium.com/@riken.mehta/full-stack-tutorial-flask-react-docker-ee316a46e876
+- https://github.com/sluger/usersnack/blob/master/api/app.py
 
 
 """
