@@ -6,7 +6,17 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+
 app = Flask(__name__)
+
+class JSONEncoder(json.JSONEncoder):
+    ''' extend json-encoder class'''
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        if isinstance(o, datetime.datetime):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 """
 MongoDB
@@ -18,14 +28,6 @@ if not MONGO_URL:
 app.config['MONGO_URI'] = MONGO_URL
 mongo = PyMongo(app)
 
-class JSONEncoder(json.JSONEncoder):
-    ''' extend json-encoder class'''
-    def default(self, o):
-        if isinstance(o, ObjectId):
-            return str(o)
-        if isinstance(o, datetime.datetime):
-            return str(o)
-        return json.JSONEncoder.default(self, o)
 app.json_encoder = JSONEncoder
 
 
@@ -38,7 +40,7 @@ CORS(app)
 """
 Trippr API Endpoints
 """
-@app.route("/seattle")
+@app.route("/seattle", methods=['GET'])
 def getSeattleCluster():
 	fp = open('trips/seattle.json', 'r')
 	seattle = json.load(fp)
@@ -52,7 +54,7 @@ def saveTrip(tripID):
 	return tripID
 
 # add place
-@app.route("/addPlace/<tripID>", methods=['GET'])
+@app.route("/addPlace/<tripID>", methods=['POST'])
 def addPlace(tripID):
 	data = request.get_json()
 	return tripID
@@ -62,7 +64,11 @@ def addPlace(tripID):
 def removePlace(tripID):
 	data = request.get_json()
 	return tripID
-	
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
+
 
 """
 
