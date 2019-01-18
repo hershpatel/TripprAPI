@@ -62,8 +62,21 @@ class Trips(Resource):
 		mongo.db.trips.insert_one(trip)
 		return make_response(trip['_id'], 200)	
 
+	def get(self):
+		_id = request.args.get('_id')
+		trip = mongo.db.trips.find_one({'_id' : _id})
+		if not trip:
+			fp = open('trips/seattle.json', 'r')
+			seattle = json.load(fp)
+			fp.close()
+			seattle['_id'] = _id
+			mongo.db.trips.insert_one(seattle)
+			return make_response(jsonify(seattle), 200)
+		return make_response(jsonify(trip), 200)
+
 api.add_resource(Seattle, '/seattle')
-api.add_resource(Trips, '/trips/save')
+api.add_resource(Trips, '/trips')
+
 
 # @app.route("/seattle", methods=['GET'])
 # def getSeattleCluster():
