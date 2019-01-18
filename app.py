@@ -6,6 +6,7 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+app = Flask(__name__)
 
 """
 MongoDB
@@ -27,10 +28,10 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 app.json_encoder = JSONEncoder
 
+
 """
 CORS
 """
-app = Flask(__name__)
 CORS(app)
 
 
@@ -61,11 +62,7 @@ def addPlace(tripID):
 def removePlace(tripID):
 	data = request.get_json()
 	return tripID
-
-# if __name__ == "__main__":
-#     port = int(os.environ.get("PORT", 5000))
-#     app.run(host='0.0.0.0', port=port, debug=True)
-
+	
 
 """
 
