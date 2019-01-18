@@ -71,19 +71,3 @@ def removePlace(tripID):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
-
-"""
-
-NOTES
-
-Processing Incoming Request Data 
-- https://scotch.io/bar-talk/processing-incoming-request-data-in-flask
-
-MongoDB / Flask / REST/ Heroku 
-- https://spapas.github.io/2014/06/30/rest-flask-mongodb-heroku/
-- https://medium.com/@riken.mehta/full-stack-tutorial-flask-react-docker-ee316a46e876
-- https://github.com/sluger/usersnack/blob/master/api/app.py
-
-
-"""
