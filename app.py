@@ -24,11 +24,11 @@ class JSONEncoder(json.JSONEncoder):
 """
 MongoDB
 """
-MONGO_URL = os.environ.get('MONGO_URL')
-if not MONGO_URL:
-    MONGO_URL = "mongodb://localhost:27017/trippr"
+MONGO_URI = os.environ.get('MONGODB_URI')
+if not MONGO_URI:
+    MONGO_URI = "mongodb://localhost:27017/trippr"
 
-app.config['MONGO_URI'] = MONGO_URL
+app.config['MONGO_URI'] = MONGO_URI
 mongo = PyMongo(app)
 
 app.json_encoder = JSONEncoder
