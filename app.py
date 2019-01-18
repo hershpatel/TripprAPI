@@ -4,6 +4,7 @@ import datetime
 from flask import Flask, jsonify, make_response, request
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from flask_restful import Resource, Api, reqparse
 from bson.objectid import ObjectId
 from bson import json_util
 
@@ -40,33 +41,55 @@ CORS(app)
 
 
 """
+RESTful
+"""
+api = Api(app)
+
+
+"""
 Trippr API Endpoints
 """
-@app.route("/seattle", methods=['GET'])
-def getSeattleCluster():
-	fp = open('trips/seattle.json', 'r')
-	seattle = json.load(fp)
-	fp.close()
-	return make_response(jsonify(seattle), 200)
+class Seattle(Resource):
+	def get(self):
+		fp = open('trips/seattle.json', 'r')
+		seattle = json.load(fp)
+		fp.close()
+		return make_response(jsonify(seattle), 200)
 
-# save trip
-@app.route("/trips/save", methods=['POST'])
-def saveTrip():
-	trip = json_util.loads(request.get_json())
-	mongo.db.trips.insert_one(trip)
-	return make_response(trip['_id'], 200)
+class Trips(Resource):
+	def post(self):
+		trip = json_util.loads(request.get_json())
+		mongo.db.trips.insert_one(trip)
+		return make_response(trip['_id'], 200)
 
-# add place
-@app.route("/places/add/<tripID>", methods=['POST'])
-def addPlace(tripID):
-	data = request.get_json()
-	return make_response(tripID, 200)
+api.add_resource(Seattle, '/seattle')
+api.add_resource(Trips, '/trips/save')
 
-# delete place
-@app.route("/places/remove/<tripID>", methods=['POST'])
-def removePlace(tripID):
-	data = request.get_json()
-	return make_response(tripID, 200)
+# @app.route("/seattle", methods=['GET'])
+# def getSeattleCluster():
+# 	fp = open('trips/seattle.json', 'r')
+# 	seattle = json.load(fp)
+# 	fp.close()
+# 	return make_response(jsonify(seattle), 200)
+
+# # save trip
+# @app.route("/trips/save", methods=['POST'])
+# def saveTrip():
+# 	trip = json_util.loads(request.get_json())
+# 	mongo.db.trips.insert_one(trip)
+# 	return make_response(trip['_id'], 200)
+
+# # add place
+# @app.route("/places/add/<tripID>", methods=['POST'])
+# def addPlace(tripID):
+# 	data = request.get_json()
+# 	return make_response(tripID, 200)
+
+# # delete place
+# @app.route("/places/remove/<tripID>", methods=['POST'])
+# def removePlace(tripID):
+# 	data = request.get_json()
+# 	return make_response(tripID, 200)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
