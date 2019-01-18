@@ -58,7 +58,7 @@ class Seattle(Resource):
 
 class Trips(Resource):
 	def post(self):
-		trip = json_util.loads(json_util.dumps(request.json))
+		trip = json_util.loads(request.json)
 		mongo.db.trips.insert_one(trip)
 		return make_response(trip['_id'], 200)	
 
