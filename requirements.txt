@@ -5,3 +5,5 @@ Werkzeug
 argparse
 itsdangerous
 flask-cors
+Flask-PyMongo
+Flask-RESTful

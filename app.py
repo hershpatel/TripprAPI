@@ -1,14 +1,42 @@
 import os
 import json
-from flask import Flask
-from flask import jsonify
-from flask import make_response, request
+import datetime
+from flask import Flask, jsonify, make_response, request
 from flask_cors import CORS
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
+
+"""
+MongoDB
+"""
+MONGO_URL = os.environ.get('MONGO_URL')
+if not MONGO_URL:
+    MONGO_URL = "mongodb://localhost:27017/rest"
+
+app.config['MONGO_URI'] = MONGO_URL
+mongo = PyMongo(app)
+
+class JSONEncoder(json.JSONEncoder):
+    ''' extend json-encoder class'''
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        if isinstance(o, datetime.datetime):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
+app.json_encoder = JSONEncoder
+
+"""
+CORS
+"""
 app = Flask(__name__)
 CORS(app)
 
-# load default trip
+
+"""
+Trippr API Endpoints
+"""
 @app.route("/seattle")
 def getSeattleCluster():
 	fp = open('trips/seattle.json', 'r')
@@ -23,7 +51,7 @@ def saveTrip(tripID):
 	return tripID
 
 # add place
-@app.route("/addPlace/<tripID>", methods=['POST'])
+@app.route("/addPlace/<tripID>", methods=['GET'])
 def addPlace(tripID):
 	data = request.get_json()
 	return tripID
@@ -34,21 +62,21 @@ def removePlace(tripID):
 	data = request.get_json()
 	return tripID
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+# if __name__ == "__main__":
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host='0.0.0.0', port=port, debug=True)
 
 
 """
 
-Flask POST Data Info
+NOTES
 
-https://scotch.io/bar-talk/processing-incoming-request-data-in-flask
+Processing Incoming Request Data 
+- https://scotch.io/bar-talk/processing-incoming-request-data-in-flask
 
-parameter data - tripprapi.com/example?key=value&key2=value2
-	value = request.args.get('key') --> if this doesn't exist, it will return None (optional)
-	value2 = request.args['key2'] --> if this doesn't exist, will cause an error (required)
+MongoDB / Flask / Heroku 
+- https://spapas.github.io/2014/06/30/rest-flask-mongodb-heroku/
+- https://medium.com/@riken.mehta/full-stack-tutorial-flask-react-docker-ee316a46e876
 
-form / json data - watch video
 
 """
