@@ -17,6 +17,7 @@ def storeSeattleGroups():
 	colors = {'A':'#6666ff', 'B':'#66cdff', 'C':'#ee9713', 'D':'#5ddb52', 'E':'#e15656'}
 	groups = set()
 	
+	# store all the groups and places
 	for line in lines:
 		group = line[0]
 		place = line[1]
@@ -34,6 +35,8 @@ def storeSeattleGroups():
 		place = {'name':place, 'address':address, 'coord':[lon,lat], 'lon':lon, 'lat':lat, 'rating':rating}
 		seattle['groups'][-1]['places'].append(place)
 
+
+	# calculate the centroid
 	for group in seattle['groups']:
 		lat = lon = 0.0
 		count = 0
@@ -44,9 +47,10 @@ def storeSeattleGroups():
 		group['centroid'] = [lon/count, lat/count]
 		group['num_places'] = count
 
+	# assign default trip id
 	seattle['trip_id'] = 'ABCD1234'
 		
-
+	# dumping into json file
 	fp = open('seattle.json', 'w')
 	json.dump(seattle, fp, indent=4, separators=(',', ': '), sort_keys=True)
 	fp.close()
