@@ -2,9 +2,10 @@ import os
 import json
 import datetime
 from flask import Flask, jsonify, make_response, request
-from flask_cors import CORS
+# from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_restful import Resource, Api, reqparse
+from flask_restful.utils import cors
 from bson.objectid import ObjectId
 from bson import json_util
 
@@ -37,7 +38,9 @@ app.json_encoder = JSONEncoder
 """
 CORS
 """
-CORS(app)
+# CORS(app)
+# website = 'https://tripprr.herokuapp.com'
+host = '*'
 
 
 """
@@ -50,6 +53,7 @@ api = Api(app)
 Trippr API Endpoints
 """
 class Seattle(Resource):
+	@cors.crossdomain(origin=host)
 	def get(self):
 		fp = open('trips/seattle.json', 'r')
 		seattle = json.load(fp)
@@ -57,11 +61,13 @@ class Seattle(Resource):
 		return make_response(jsonify(seattle), 200)
 
 class Trips(Resource):
+	@cors.crossdomain(origin=host)
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
 		mongo.db.trips.insert_one(trip)
 		return make_response(trip['_id'], 200)	
 
+	@cors.crossdomain(origin=host)
 	def get(self):
 		_id = request.args.get('_id')
 		trip = mongo.db.trips.find_one({'_id' : _id})
