@@ -50,7 +50,7 @@ def getSeattleCluster():
 	return make_response(jsonify(seattle), 200)
 
 # save trip
-@app.route("/trips/<tripID>", methods=['GET'])
+@app.route("/trips/<tripID>", methods=['POST'])
 def saveTrip(tripID):
 	trip = json_util.loads(request.get_json())
 	mongo.db.trips.insert_one(trip)
@@ -84,5 +84,6 @@ MongoDB / Flask / REST/ Heroku
 - https://spapas.github.io/2014/06/30/rest-flask-mongodb-heroku/
 - https://medium.com/@riken.mehta/full-stack-tutorial-flask-react-docker-ee316a46e876
 - https://github.com/sluger/usersnack/blob/master/api/app.py
+
 
 """
