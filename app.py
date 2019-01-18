@@ -50,11 +50,11 @@ def getSeattleCluster():
 	return make_response(jsonify(seattle), 200)
 
 # save trip
-@app.route("/trips/<tripID>", methods=['POST'])
-def saveTrip(tripID):
+@app.route("/trips/save", methods=['POST'])
+def saveTrip():
 	trip = json_util.loads(request.get_json())
 	mongo.db.trips.insert_one(trip)
-	return make_response(tripID, 200)
+	return make_response(trip['_id'], 200)
 
 # add place
 @app.route("/places/add/<tripID>", methods=['POST'])
