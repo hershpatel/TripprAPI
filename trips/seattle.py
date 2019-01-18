@@ -48,7 +48,7 @@ def storeSeattleGroups():
 		group['num_places'] = count
 
 	# assign default trip id
-	seattle['trip_id'] = 'ABCD1234'
+	seattle['_id'] = 'ABCD1234'
 		
 	# dumping into json file
 	fp = open('seattle.json', 'w')
