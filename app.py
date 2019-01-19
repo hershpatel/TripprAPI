@@ -2,7 +2,7 @@ import os
 import json
 import datetime
 from flask import Flask, jsonify, make_response, request
-# from flask_cors import CORS
+from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_restful import Resource, Api, reqparse
 from flask_restful.utils import cors
