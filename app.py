@@ -39,7 +39,7 @@ app.json_encoder = JSONEncoder
 CORS
 """
 # CORS(app)
-# CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 # website = 'https://tripprr.herokuapp.com'
 host = '*'
 
@@ -54,7 +54,7 @@ api = Api(app)
 Trippr API Endpoints
 """
 class Seattle(Resource):
-	@cors.crossdomain(origin=host)
+	# @cors.crossdomain(origin=host)
 	def get(self):
 		fp = open('trips/seattle.json', 'r')
 		seattle = json.load(fp)
@@ -62,7 +62,7 @@ class Seattle(Resource):
 		return make_response(jsonify(seattle), 200)
 
 class Trips(Resource):
-	@cors.crossdomain(origin=host)
+	# @cors.crossdomain(origin=host)
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
 		mongo.db.trips.insert_one(trip)
@@ -70,7 +70,7 @@ class Trips(Resource):
 		response.headers.add('Access-Control-Allow-Origin', '*')
 		return response
 
-	@cors.crossdomain(origin=host)
+	# @cors.crossdomain(origin=host)
 	def get(self):
 		_id = request.args.get('_id')
 		trip = mongo.db.trips.find_one({'_id' : _id})
