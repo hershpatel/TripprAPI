@@ -68,6 +68,8 @@ class Trips(Resource):
 		mongo.db.trips.insert_one(trip)
 		response = make_response(trip['_id'], 200)
 		response.headers.add('Access-Control-Allow-Origin', '*')
+		response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  		response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
 		return response
 
 	# @cors.crossdomain(origin=host)
