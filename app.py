@@ -39,6 +39,7 @@ app.json_encoder = JSONEncoder
 CORS
 """
 # CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 # website = 'https://tripprr.herokuapp.com'
 host = '*'
 
