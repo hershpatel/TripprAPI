@@ -39,7 +39,7 @@ app.json_encoder = JSONEncoder
 CORS
 """
 # CORS(app)
-CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, resources={r"/*": {"origins": "*"}})
 # website = 'https://tripprr.herokuapp.com'
 host = '*'
 
@@ -66,7 +66,9 @@ class Trips(Resource):
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
 		mongo.db.trips.insert_one(trip)
-		return make_response(trip['_id'], 200)	
+		response = make_response(trip['_id'], 200)
+		response.headers.add('Access-Control-Allow-Origin', '*')
+		return response
 
 	@cors.crossdomain(origin=host)
 	def get(self):
