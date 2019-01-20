@@ -63,7 +63,11 @@ class Trips(Resource):
 	# @cors.crossdomain(origin='*', methods={"HEAD","OPTIONS","GET"})
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
-		mongo.db.trips.insert_one(trip)
+		query = {"_id": trip["_id"]}
+		update = '$set': {
+					'groups': trip['groups']
+				}
+		mongo.db.trips.updateOne(query, update)
 		# response = make_response(trip['_id'], 200)
 		return "success"
 
