@@ -60,8 +60,7 @@ class Seattle(Resource):
 		return make_response(jsonify(seattle), 200)
 
 class Trips(Resource):
-	@cors.crossdomain(origin='*',
-                              methods={"HEAD","OPTIONS","GET"})
+	@cors.crossdomain(origin='*', methods={"HEAD","OPTIONS","GET"})
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
 		mongo.db.trips.insert_one(trip)
@@ -69,6 +68,7 @@ class Trips(Resource):
 		response.headers.add('Access-Control-Allow-Origin', '*')
 		return response
 
+	@cors.crossdomain(origin='*', methods={"HEAD","OPTIONS","GET"})
 	def get(self):
 		_id = request.args.get('_id')
 		trip = mongo.db.trips.find_one({'_id' : _id})
