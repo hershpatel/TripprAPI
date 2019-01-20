@@ -64,9 +64,8 @@ class Trips(Resource):
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
 		mongo.db.trips.insert_one(trip)
-		response = make_response(trip['_id'], 200)
-		response.headers.add('Access-Control-Allow-Origin', '*')
-		return response
+		# response = make_response(trip['_id'], 200)
+		return "success"
 
 	@cors.crossdomain(origin='*', methods={"HEAD","OPTIONS","GET"})
 	def get(self):
