@@ -64,8 +64,9 @@ class Trips(Resource):
 	def post(self):
 		trip = json_util.loads(json_util.dumps(request.json))
 		query = {"_id": trip["_id"]}
-		update = '$set': {
+		update = {'$set': {
 					'groups': trip['groups']
+					} 
 				}
 		mongo.db.trips.updateOne(query, update)
 		# response = make_response(trip['_id'], 200)
