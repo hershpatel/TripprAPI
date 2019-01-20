@@ -68,7 +68,7 @@ class Trips(Resource):
 					'groups': trip['groups']
 					} 
 				}
-		mongo.db.trips.updateOne(query, update)
+		mongo.db.trips.update_one(query, update)
 		# response = make_response(trip['_id'], 200)
 		return "success"
 
